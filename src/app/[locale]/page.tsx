@@ -6,12 +6,18 @@ import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 
 interface HomePageProps {
-  params: {
+  params: Promise<{
     locale: Locale;
-  };
+  }>;
 }
 
-export default function HomePage({ params: { locale } }: HomePageProps) {
+export default async function HomePage(props: HomePageProps) {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
   const t = dictionary[locale];
 
   return (

@@ -5,11 +5,12 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 // Update the props type to match Next.js expectations
-export default function ContactPage({
-  params,
-}: {
-  params: { locale: Locale };
-}) {
+export default async function ContactPage(
+  props: {
+    params: Promise<{ locale: Locale }>;
+  }
+) {
+  const params = await props.params;
   const locale = params.locale;
   const t = dictionary[locale];
 

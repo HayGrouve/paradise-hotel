@@ -6,12 +6,18 @@ import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 
 interface RoomsPageProps {
-  params: {
+  params: Promise<{
     locale: Locale;
-  };
+  }>;
 }
 
-export default function RoomsPage({ params: { locale } }: RoomsPageProps) {
+export default async function RoomsPage(props: RoomsPageProps) {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
   const t = dictionary[locale];
 
   return (
