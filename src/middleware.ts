@@ -6,12 +6,28 @@ import { locales, defaultLocale } from "@/lib/i18n/config";
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  // Check if the pathname has a locale
+  // Skip if the pathname has a file extension (e.g., .jpg, .png)
+  if (/\.(.*)$/.test(pathname)) {
+    return NextResponse.next();
+  }
+
+  // Skip if the pathname is for API routes
+  if (pathname.startsWith("/api/")) {
+    return NextResponse.next();
+  }
+
+  // Skip if the pathname is for _next (Next.js internal routes)
+  if (pathname.startsWith("/_next/")) {
+    return NextResponse.next();
+  }
+
+  // Check if the pathname already has a locale
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   );
 
-  if (!pathnameHasLocale) {
+  // Only redirect if the pathname is exactly '/' or doesn't have a locale
+  if (pathname === "/" || !pathnameHasLocale) {
     // Redirect to the default locale
     return NextResponse.redirect(
       new URL(
@@ -25,8 +41,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    // Skip all internal paths (_next)
-    "/((?!_next|api|.*\\..*).*)",
-  ],
+  matcher: ["/((?!_next|api|.*\\..*).*)"],
 };

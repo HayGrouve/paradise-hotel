@@ -1,8 +1,6 @@
 // app/layout.tsx
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
-import { redirect } from "next/navigation";
-import { defaultLocale } from "@/lib/i18n/config";
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -18,8 +16,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  redirect(`/${defaultLocale}`);
-
   return (
     <html lang="en">
       <body className={inter.className}>{children}</body>
