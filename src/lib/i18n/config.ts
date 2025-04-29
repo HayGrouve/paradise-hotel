@@ -8,7 +8,8 @@ export const dictionary = {
     home: "Home",
     rooms: "Rooms",
     contactUs: "Contact Us",
-    bookNow: "Book Now",
+    viewRooms: "View Rooms",
+    bookNow: "Book now",
     welcome: "Welcome to Paradise Deluxe Apartments",
     welcomeDescription:
       "Your perfect escape where luxury meets comfort. Nestled in the heart of Nea Peramos, we offer a serene retreat with modern amenities, exceptional service, and breathtaking views.",
@@ -44,7 +45,8 @@ export const dictionary = {
     home: "Начало",
     rooms: "Стаи",
     contactUs: "Контакти",
-    bookNow: "Резервирай",
+    bookNow: "Резервирайте сега",
+    viewRooms: "Виж стаите",
     welcome: "Добре дошли в Paradise Deluxe Apartments",
     welcomeDescription:
       "Вашето перфектно бягство, където луксът се среща с комфорта. Разположен в сърцето на Неа Перамос, ние предлагаме спокойно убежище с модерни удобства, изключително обслужване и спиращи дъха гледки.",

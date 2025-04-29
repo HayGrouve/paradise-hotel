@@ -14,9 +14,7 @@ interface HomePageProps {
 export default async function HomePage(props: HomePageProps) {
   const params = await props.params;
 
-  const {
-    locale
-  } = params;
+  const { locale } = params;
 
   const t = dictionary[locale];
 
@@ -24,43 +22,54 @@ export default async function HomePage(props: HomePageProps) {
     <div className="flex min-h-screen flex-col">
       <Header locale={locale} />
 
-      <main className="flex-grow">
+      <main className="flex-grow tracking-wide">
         {/* Hero Section */}
         <section className="relative h-screen">
           <img
-            src="/images/hero-bg.jpg"
+            src="/images/hero.webp"
             alt="Paradise Deluxe Apartments"
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 px-4 text-center text-white">
-            <div className="max-w-3xl">
+          <div className="absolute inset-0 mt-[-200px] flex flex-col items-center justify-center bg-black/30 px-4 text-center text-white">
+            <div className="flex max-w-3xl flex-col items-center justify-center">
+              {/* add the logo */}
+              <img
+                src="/images/logo.svg"
+                alt="Paradise Deluxe Apartments Logo"
+                className="h-[40rem] max-w-full object-contain"
+              />
               <h1 className="mb-6 font-serif text-5xl">Paradise</h1>
               <p className="mb-8 text-xl">{t.welcomeDescription}</p>
               <Link
                 href={`/${locale}/rooms`}
-                className="rounded-md bg-amber-600 px-8 py-3 text-white transition-colors hover:bg-amber-700"
+                className="inline-block rounded-[20px] bg-gradient-to-r from-[#0D1321] via-[#124559] to-[#598392] px-8 py-3 text-center text-white transition-all duration-300 ease-in-out hover:brightness-110 focus:ring-2 focus:ring-[#598392] focus:ring-offset-2 focus:outline-none"
               >
-                {t.bookNow}
+                {t.viewRooms}
               </Link>
             </div>
           </div>
         </section>
 
         {/* About Section */}
-        <section className="bg-stone-100 py-20">
-          <div className="container mx-auto px-4">
+        <section className="relative flex h-dvh flex-col items-center justify-center bg-[url('/images/about-us-lobby.webp')] bg-cover bg-center bg-no-repeat py-20 text-xl text-white">
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-xs"></div>
+          {/* Adjust opacity (e.g., /90) and blur as needed */}
+          {/* Content Container - Needs relative positioning */}
+          <div className="relative container mx-auto px-4">
             <div className="mx-auto max-w-3xl text-center">
-              <h2 className="mb-6 font-serif text-3xl">{t.aboutUs}</h2>
-              <p className="mb-8 text-gray-700">{t.aboutDescription}</p>
-              <p className="text-gray-700">{t.aboutDescription2}</p>
+              {/* Optional: Adjust text color if needed for contrast */}
+              <h2 className="mb-6 font-serif text-5xl">{t.aboutUs}</h2>
+              <p className="mb-8">{t.aboutDescription}</p>
+              <p className="">{t.aboutDescription2}</p>
             </div>
           </div>
         </section>
 
         {/* Room Preview Section */}
-        <section className="bg-amber-50 py-20">
+        <section className="h-dvh bg-[#CEAA87] py-20">
           <div className="container mx-auto px-4">
-            <h2 className="mb-12 text-center font-serif text-3xl">
+            <h2 className="mb-12 text-center font-serif text-5xl">
               {t.ourRooms}
             </h2>
 

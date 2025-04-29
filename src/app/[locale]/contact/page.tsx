@@ -5,11 +5,9 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 // Update the props type to match Next.js expectations
-export default async function ContactPage(
-  props: {
-    params: Promise<{ locale: Locale }>;
-  }
-) {
+export default async function ContactPage(props: {
+  params: Promise<{ locale: Locale }>;
+}) {
   const params = await props.params;
   const locale = params.locale;
   const t = dictionary[locale];
@@ -52,55 +50,13 @@ export default async function ContactPage(
                     <strong>{t.email}:</strong> paradiseapartments@gmail.com
                   </p>
                 </div>
-
-                <div className="mt-8">
-                  <h3 className="mb-4 text-xl font-medium">{t.sendMessage}</h3>
-                  <form className="space-y-4">
-                    <div>
-                      <label htmlFor="name" className="mb-1 block">
-                        {t.name}
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        className="w-full rounded-md border px-4 py-2"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="mb-1 block">
-                        {t.email}
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        className="w-full rounded-md border px-4 py-2"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="message" className="mb-1 block">
-                        {t.message}
-                      </label>
-                      <textarea
-                        id="message"
-                        rows={4}
-                        className="w-full rounded-md border px-4 py-2"
-                      ></textarea>
-                    </div>
-                    <button
-                      type="submit"
-                      className="rounded-md bg-amber-600 px-6 py-2 text-white transition-colors hover:bg-amber-700"
-                    >
-                      {t.send}
-                    </button>
-                  </form>
-                </div>
               </div>
 
               <div className="md:w-1/2">
                 <div className="h-96 overflow-hidden rounded-lg bg-gray-200">
                   {/* Replace with actual Google Maps embed */}
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12345.67890!2d24.123456!3d40.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDA3JzM0LjQiTiAyNMKwMDcnMzQuNCJF!5e0!3m2!1sen!2sbg!4v1234567890!5m2!1sen!2sbg"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6036.9834744160025!2d24.29250215022347!3d40.83912640239889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14aeb7d96262bd5b%3A0x69035280ab1081f6!2sNea%20Peramos%20640%2007%2C%20Greece!5e0!3m2!1sen!2sbg!4v1745933055166!5m2!1sen!2sbg"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
