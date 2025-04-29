@@ -14,9 +14,7 @@ interface RoomsPageProps {
 export default async function RoomsPage(props: RoomsPageProps) {
   const params = await props.params;
 
-  const {
-    locale
-  } = params;
+  const { locale } = params;
 
   const t = dictionary[locale];
 
@@ -24,7 +22,7 @@ export default async function RoomsPage(props: RoomsPageProps) {
     <div className="flex min-h-screen flex-col">
       <Header locale={locale} />
 
-      <main className="flex-grow bg-amber-50 py-16">
+      <main className="flex-grow bg-[#CEAA87] py-16">
         <div className="container mx-auto px-4">
           <h1 className="mb-16 text-center font-serif text-4xl">
             {t.ourRooms}
@@ -34,7 +32,7 @@ export default async function RoomsPage(props: RoomsPageProps) {
             <RoomCard
               locale={locale}
               title={t.deluxeRoom}
-              image="/images/deluxe-room.jpg"
+              image="/images/deluxe-room.webp"
               type="deluxe"
               description="With an area of 30 sq. m. and located on the high floor, this room offers all the necessary amenities for two or three people."
               viewMore={t.viewMore}
@@ -42,7 +40,7 @@ export default async function RoomsPage(props: RoomsPageProps) {
             <RoomCard
               locale={locale}
               title={t.standardRoom}
-              image="/images/standard-room.jpg"
+              image="/images/standard-room.webp"
               type="standard"
               description="Comfortable and well-appointed, our standard rooms provide everything you need for a pleasant stay."
               viewMore={t.viewMore}
@@ -50,7 +48,7 @@ export default async function RoomsPage(props: RoomsPageProps) {
             <RoomCard
               locale={locale}
               title={t.budgetRoom}
-              image="/images/budget-room.jpg"
+              image="/images/budget-room.webp"
               type="budget"
               description="Affordable without compromising on quality, our budget rooms are perfect for the cost-conscious traveler."
               viewMore={t.viewMore}
@@ -58,7 +56,7 @@ export default async function RoomsPage(props: RoomsPageProps) {
             <RoomCard
               locale={locale}
               title={t.businessRoom}
-              image="/images/business-room.jpg"
+              image="/images/business-room.webp"
               type="business"
               description="Designed with the business traveler in mind, featuring a work desk and high-speed internet."
               viewMore={t.viewMore}
@@ -91,7 +89,9 @@ function RoomCard({
 }: RoomCardProps) {
   return (
     <div className="overflow-hidden rounded-lg bg-white shadow-lg">
-      <img src={image} alt={title} className="h-80 w-full object-cover" />
+      <Link href={`/${locale}/rooms/${type}`}>
+        <img src={image} alt={title} className="h-80 w-full object-cover" />
+      </Link>
       <div className="p-8">
         <h2 className="mb-4 text-2xl font-medium">{title}</h2>
         <p className="mb-6 text-gray-600">{description}</p>

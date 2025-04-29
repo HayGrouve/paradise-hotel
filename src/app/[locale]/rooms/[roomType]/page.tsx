@@ -43,10 +43,10 @@ const roomData = {
       ],
     },
     images: [
-      "/images/deluxe-room-1.jpg",
-      "/images/deluxe-room-2.jpg",
-      "/images/deluxe-room-3.jpg",
-      "/images/deluxe-room-4.jpg",
+      "/images/deluxe-room.webp",
+      "/images/deluxe-room-2.webp",
+      "/images/deluxe-room-3.webp",
+      "/images/deluxe-room-4.webp",
     ],
   },
   standard: {
@@ -78,10 +78,10 @@ const roomData = {
       ],
     },
     images: [
-      "/images/standard-room-1.jpg",
-      "/images/standard-room-2.jpg",
-      "/images/standard-room-3.jpg",
-      "/images/standard-room-4.jpg",
+      "/images/standard-room.webp",
+      "/images/standard-room-2.webp",
+      "/images/standard-room-3.webp",
+      "/images/standard-room-4.webp",
     ],
   },
   budget: {
@@ -113,10 +113,10 @@ const roomData = {
       ],
     },
     images: [
-      "/images/budget-room-1.jpg",
-      "/images/budget-room-2.jpg",
-      "/images/budget-room-3.jpg",
-      "/images/budget-room-4.jpg",
+      "/images/budget-room.webp",
+      "/images/budget-room-2.webp",
+      "/images/budget-room-3.webp",
+      "/images/budget-room-4.webp",
     ],
   },
   business: {
@@ -150,10 +150,10 @@ const roomData = {
       ],
     },
     images: [
-      "/images/business-room-1.jpg",
-      "/images/business-room-2.jpg",
-      "/images/business-room-3.jpg",
-      "/images/business-room-4.jpg",
+      "/images/business-room.webp",
+      "/images/business-room-2.webp",
+      "/images/business-room-3.webp",
+      "/images/business-room-4.webp",
     ],
   },
 };
@@ -161,10 +161,7 @@ const roomData = {
 export default async function RoomPage(props: RoomPageProps) {
   const params = await props.params;
 
-  const {
-    locale,
-    roomType
-  } = params;
+  const { locale, roomType } = params;
 
   const t = dictionary[locale];
   const room = roomData[roomType as keyof typeof roomData];

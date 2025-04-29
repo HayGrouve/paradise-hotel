@@ -20,11 +20,11 @@ export default async function ContactPage(props: {
         {/* Hero Banner */}
         <div className="relative h-96">
           <img
-            src="/images/nea-peramos.jpg"
+            src="/images/contact-hero.webp"
             alt="Nea Peramos, Kavala"
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+          <div className="absolute inset-0 flex items-center justify-center bg-black/50 backdrop-blur-xs">
             <h1 className="font-serif text-4xl text-white">{t.contactUs}</h1>
           </div>
         </div>
@@ -32,7 +32,7 @@ export default async function ContactPage(props: {
         {/* Contact Information */}
         <section className="bg-amber-100 py-16">
           <div className="container mx-auto px-4">
-            <div className="md:flex">
+            <div className="items-center justify-center md:flex">
               <div className="mb-8 md:mb-0 md:w-1/2 md:pr-8">
                 <h2 className="mb-6 font-serif text-2xl">{t.contactUs}</h2>
                 <div className="space-y-4">

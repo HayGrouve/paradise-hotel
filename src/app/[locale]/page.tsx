@@ -1,93 +1,96 @@
 // app/[locale]/page.tsx
-"use client";
+"use client"; // Keep as Client Component for Framer Motion
 
 import type { Locale } from "@/lib/i18n/config";
 import { dictionary } from "@/lib/i18n/config";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { use } from "react"; // Import the 'use' hook
+import { motion } from "framer-motion"; // Only need motion now
+import { use } from "react"; // Keep use hook
 
-// Define animation variants
+// --- Animation Variants ---
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.7, ease: "easeOut" },
   },
+  // Exit animations are less relevant without section snapping, but can be kept
+  exit: { opacity: 0, y: -15, transition: { duration: 0.3, ease: "easeIn" } },
 };
 
 const staggerContainer = {
   animate: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.15, // Stagger delay between children
     },
   },
 };
 
-// Update Props type to reflect the Promise nature of params from the server
+const cardVariants = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  exit: { opacity: 0, y: -10, transition: { duration: 0.3, ease: "easeIn" } }, // Optional exit animation
+};
+// --- ---
+
+// Props type reflecting the Promise nature of params
 type HomePageProps = {
   params: Promise<{
-    // params is a Promise
     locale: Locale;
   }>;
 };
 
+// No longer need NUM_SECTIONS or scroll-related state/refs
 export default function HomePage(props: HomePageProps) {
   // Unwrap the params Promise using React.use()
-  const params = use(props.params); // <-- Use the hook here
-  const { locale } = params; // Now you can safely access locale
+  const params = use(props.params);
+  const { locale } = params;
   const t = dictionary[locale];
+
+  // Removed the useEffect for wheel handling and related state/refs
 
   return (
     <div className="flex min-h-screen flex-col">
       <Header locale={locale} />
 
+      {/* Main container - Remove ref, h-screen, overflow-hidden */}
+      {/* Let the browser handle scrolling */}
       <main className="flex-grow tracking-wide">
         {/* --- Hero Section --- */}
+        {/* Keep h-screen for the hero to fill the initial viewport */}
         <motion.section
-          className="relative flex h-screen flex-col items-center justify-center"
+          className="relative flex h-screen flex-col items-center justify-start"
           initial="initial"
-          animate="animate"
-          variants={staggerContainer}
+          whileInView="animate" // Trigger animation when section is in view
+          viewport={{ once: false, amount: 0.4 }} // Re-animate every time, trigger at 40% visibility
+          variants={staggerContainer} // Apply stagger effect to children
+          // exit="exit" // Uncomment if you have defined exit variants and want exit animations
         >
           <img
             src="/images/hero.webp"
             alt="Paradise Deluxe Apartments"
             className="absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/30"></div>
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-xs"></div>{" "}
+          {/* Overlay */}
           <div className="relative z-10 flex flex-col items-center justify-center px-4 text-center text-white">
             <motion.div
               className="flex max-w-3xl flex-col items-center justify-center"
-              variants={staggerContainer}
+              variants={staggerContainer} // Inner stagger container
             >
               <motion.img
                 src="/images/logo.svg"
                 alt="Paradise Deluxe Apartments Logo"
-                className="mb-4 h-40 max-w-full object-contain"
-                variants={fadeInUp}
-                initial="initial"
-                animate="animate"
-                viewport={{ once: true, amount: 0.5 }}
+                className="mt-20 h-[40rem] max-w-full object-contain"
+                variants={fadeInUp} // Apply fade-in-up animation
               />
-              <motion.p
-                className="mb-8 text-xl"
-                variants={fadeInUp}
-                initial="initial"
-                animate="animate"
-                viewport={{ once: true, amount: 0.5 }}
-              >
+              <motion.p className="mb-8 text-2xl" variants={fadeInUp}>
                 {t.welcomeDescription}
               </motion.p>
-              <motion.div
-                variants={fadeInUp}
-                initial="initial"
-                animate="animate"
-                viewport={{ once: true, amount: 0.5 }}
-              >
+              <motion.div variants={fadeInUp}>
                 <Link
                   href={`/${locale}/rooms`}
                   className="inline-block rounded-[20px] bg-gradient-to-r from-[#0D1321] via-[#124559] to-[#598392] px-8 py-3 text-center text-white transition-all duration-300 ease-in-out hover:brightness-110 focus:ring-2 focus:ring-[#598392] focus:ring-offset-2 focus:outline-none"
@@ -100,14 +103,17 @@ export default function HomePage(props: HomePageProps) {
         </motion.section>
 
         {/* --- About Section --- */}
+        {/* Remove h-screen/h-dvh to allow natural height */}
         <motion.section
-          className="relative flex h-dvh flex-col items-center justify-center bg-[url('/images/about-us-lobby.webp')] bg-cover bg-center bg-no-repeat py-20 text-xl text-white"
+          className="relative flex h-dvh flex-col items-center justify-center bg-[url('/images/about-us-lobby.webp')] bg-cover bg-center bg-no-repeat py-20 text-xl text-white md:py-32"
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: false, amount: 0.3 }} // Adjust amount if needed
           variants={staggerContainer}
+          // exit="exit"
         >
           <div className="absolute inset-0 bg-black/50 backdrop-blur-xs"></div>
+          {/* Overlay */}
           <div className="relative z-10 container mx-auto px-4">
             <div className="mx-auto max-w-3xl text-center">
               <motion.h2
@@ -125,12 +131,14 @@ export default function HomePage(props: HomePageProps) {
         </motion.section>
 
         {/* --- Room Preview Section --- */}
+        {/* Remove h-screen/h-dvh to allow natural height */}
         <motion.section
-          className="flex h-dvh flex-col justify-center bg-[#CEAA87] py-20"
+          className="flex h-dvh flex-col justify-center bg-[#CEAA87] py-20 md:py-32" // Added more padding
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: false, amount: 0.1 }} // Trigger earlier as content might be taller
           variants={staggerContainer}
+          // exit="exit"
         >
           <div className="container mx-auto px-4">
             <motion.h2
@@ -141,8 +149,9 @@ export default function HomePage(props: HomePageProps) {
             </motion.h2>
             <motion.div
               className="grid grid-cols-1 gap-8 md:grid-cols-2"
-              variants={staggerContainer}
+              variants={staggerContainer} // Stagger the cards
             >
+              {/* Room Cards will inherit animation trigger from parent section */}
               <RoomCard
                 locale={locale}
                 title={t.deluxeRoom}
@@ -176,12 +185,13 @@ export default function HomePage(props: HomePageProps) {
         </motion.section>
       </main>
 
+      {/* Footer is now naturally reachable after scrolling */}
       <Footer locale={locale} />
     </div>
   );
 }
 
-// --- RoomCard component remains the same ---
+// --- RoomCard component ---
 interface RoomCardProps {
   locale: Locale;
   title: string;
@@ -190,19 +200,18 @@ interface RoomCardProps {
   viewMore: string;
 }
 
-const cardVariants = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-};
-
 function RoomCard({ locale, title, image, type, viewMore }: RoomCardProps) {
   return (
+    // Apply motion properties directly to the card
     <motion.div
-      className="cursor-pointer overflow-hidden rounded-lg bg-white shadow-md"
-      variants={cardVariants}
-      whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+      className="overflow-hidden rounded-lg bg-white shadow-md"
+      variants={cardVariants} // Use defined variants for entry/exit
+      whileHover={{ scale: 1.03, transition: { duration: 0.2 } }} // Hover effect
+      // initial, animate, exit are handled by parent's whileInView + stagger
     >
-      <img src={image} alt={title} className="h-64 w-full object-cover" />
+      <Link href={`/${locale}/rooms/${type}`}>
+        <img src={image} alt={title} className="h-64 w-full object-cover" />
+      </Link>
       <div className="p-6">
         <h3 className="mb-2 text-xl font-medium">{title}</h3>
         <Link
