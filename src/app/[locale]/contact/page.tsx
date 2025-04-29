@@ -1,20 +1,23 @@
 // app/[locale]/contact/page.tsx
 import type { Locale } from "@/lib/i18n/config";
 import { dictionary } from "@/lib/i18n/config";
+import { use } from "react"; // Import use hook
 
 // Update the props type to match Next.js expectations
-export default async function ContactPage(props: {
+type ContactPageProps = {
   params: Promise<{ locale: Locale }>;
-}) {
-  const params = await props.params;
-  const locale = params.locale;
+};
+
+export default function ContactPage(props: ContactPageProps) {
+  const params = use(props.params);
+  const { locale } = params;
   const t = dictionary[locale];
 
   return (
     <div className="flex min-h-screen flex-col">
-      <main className="flex-grow bg-[#CEAA87]">
+      <main className="flex flex-grow flex-col bg-[#CEAA87]">
         {/* Hero Banner */}
-        <div className="relative h-96">
+        <div className="relative h-96 flex-shrink-0">
           <img
             src="/images/contact-hero.webp"
             alt="Nea Peramos, Kavala"
@@ -25,8 +28,8 @@ export default async function ContactPage(props: {
           </div>
         </div>
 
-        {/* Contact Information */}
-        <section className="h-full py-16">
+        {/* Contact Information Section */}
+        <section className="flex flex-grow items-center py-16">
           <div className="container mx-auto px-4">
             <div className="items-center justify-center md:flex">
               <div className="mb-8 md:mb-0 md:w-1/2 md:pr-8">
@@ -50,7 +53,6 @@ export default async function ContactPage(props: {
 
               <div className="md:w-1/2">
                 <div className="h-96 overflow-hidden rounded-lg bg-gray-200">
-                  {/* Replace with actual Google Maps embed */}
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6036.9834744160025!2d24.29250215022347!3d40.83912640239889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14aeb7d96262bd5b%3A0x69035280ab1081f6!2sNea%20Peramos%20640%2007%2C%20Greece!5e0!3m2!1sen!2sbg!4v1745933055166!5m2!1sen!2sbg"
                     width="100%"
