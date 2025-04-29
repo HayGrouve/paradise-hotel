@@ -25,7 +25,7 @@ export default function LanguageSwitcher({
           href={`/${locale}${pathnameWithoutLocale}`}
           className={`rounded px-2 py-1 ${
             currentLocale === locale
-              ? "bg-amber-200 font-medium text-stone-800"
+              ? "bg-[#CEAA87] font-medium text-stone-800"
               : "text-white hover:bg-stone-600"
           }`}
         >

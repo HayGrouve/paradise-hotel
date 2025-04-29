@@ -4,6 +4,8 @@ import "@/styles/globals.css";
 import type { Locale } from "@/lib/i18n/config";
 import { locales } from "@/lib/i18n/config";
 import { notFound } from "next/navigation";
+import Header from "../../components/layout/Header";
+import Footer from "../../components/layout/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +30,11 @@ export default async function LocaleLayout(props: {
 
   return (
     <html lang={locale}>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Header locale={locale as Locale} />
+        {children}
+        <Footer locale={locale as Locale} />
+      </body>
     </html>
   );
 }

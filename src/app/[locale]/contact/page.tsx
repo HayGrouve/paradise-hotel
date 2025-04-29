@@ -1,8 +1,6 @@
 // app/[locale]/contact/page.tsx
 import type { Locale } from "@/lib/i18n/config";
 import { dictionary } from "@/lib/i18n/config";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 
 // Update the props type to match Next.js expectations
 export default async function ContactPage(props: {
@@ -14,9 +12,7 @@ export default async function ContactPage(props: {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Header locale={locale} />
-
-      <main className="flex-grow">
+      <main className="flex-grow bg-[#CEAA87]">
         {/* Hero Banner */}
         <div className="relative h-96">
           <img
@@ -30,7 +26,7 @@ export default async function ContactPage(props: {
         </div>
 
         {/* Contact Information */}
-        <section className="bg-amber-100 py-16">
+        <section className="h-full py-16">
           <div className="container mx-auto px-4">
             <div className="items-center justify-center md:flex">
               <div className="mb-8 md:mb-0 md:w-1/2 md:pr-8">
@@ -40,7 +36,7 @@ export default async function ContactPage(props: {
                     <strong>{t.location}:</strong> Nea Peramos, Kavala
                   </p>
                   <p>
-                    <strong>{t.address}:</strong>{" "}
+                    <strong>{t.address}:</strong>
                     .................................
                   </p>
                   <p>
@@ -69,8 +65,6 @@ export default async function ContactPage(props: {
           </div>
         </section>
       </main>
-
-      <Footer locale={locale} />
     </div>
   );
 }

@@ -3,8 +3,6 @@
 
 import type { Locale } from "@/lib/i18n/config";
 import { dictionary } from "@/lib/i18n/config";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 import { motion } from "framer-motion"; // Only need motion now
 import { use } from "react"; // Keep use hook
@@ -54,8 +52,6 @@ export default function HomePage(props: HomePageProps) {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Header locale={locale} />
-
       {/* Main container - Remove ref, h-screen, overflow-hidden */}
       {/* Let the browser handle scrolling */}
       <main className="flex-grow tracking-wide">
@@ -184,9 +180,6 @@ export default function HomePage(props: HomePageProps) {
           </div>
         </motion.section>
       </main>
-
-      {/* Footer is now naturally reachable after scrolling */}
-      <Footer locale={locale} />
     </div>
   );
 }

@@ -1,8 +1,6 @@
 // app/[locale]/rooms/[roomType]/page.tsx
 import type { Locale } from "@/lib/i18n/config";
 import { dictionary } from "@/lib/i18n/config";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 
 interface RoomPageProps {
@@ -173,9 +171,7 @@ export default async function RoomPage(props: RoomPageProps) {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Header locale={locale} />
-
-      <main className="flex-grow bg-amber-100">
+      <main className="flex-grow bg-[#CEAA87]">
         <div className="container mx-auto px-4 py-12">
           <div className="overflow-hidden rounded-lg bg-white shadow-lg">
             <div className="md:flex">
@@ -257,8 +253,6 @@ export default async function RoomPage(props: RoomPageProps) {
           </div>
         </div>
       </main>
-
-      <Footer locale={locale} />
     </div>
   );
 }
