@@ -2,6 +2,7 @@
 import type { Locale } from "@/lib/i18n/config";
 import { dictionary } from "@/lib/i18n/config";
 import Link from "next/link";
+import RoomCard from "../../../../components/rooms/RoomCard";
 
 interface RoomPageProps {
   params: Promise<{
@@ -232,22 +233,15 @@ export default async function RoomPage(props: RoomPageProps) {
               {Object.entries(roomData)
                 .filter(([key]) => key !== roomType)
                 .map(([key, data]) => (
-                  <Link
+                  <RoomCard
+                    className="text-center"
                     key={key}
-                    href={`/${locale}/rooms/${key}`}
-                    className="overflow-hidden rounded-lg bg-white shadow-md transition-shadow hover:shadow-lg"
-                  >
-                    <img
-                      src={data.images[0]}
-                      alt={data.title[locale]}
-                      className="h-48 w-full object-cover"
-                    />
-                    <div className="p-4">
-                      <h3 className="text-lg font-medium">
-                        {data.title[locale]}
-                      </h3>
-                    </div>
-                  </Link>
+                    locale={locale}
+                    title={data.title[locale]}
+                    image={data.images[0]!}
+                    type={key}
+                    imageHeightClass="h-48"
+                  />
                 ))}
             </div>
           </div>

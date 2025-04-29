@@ -4,8 +4,9 @@
 import type { Locale } from "@/lib/i18n/config";
 import { dictionary } from "@/lib/i18n/config";
 import Link from "next/link";
-import { motion } from "framer-motion"; // Only need motion now
-import { use } from "react"; // Keep use hook
+import { motion } from "framer-motion";
+import { use } from "react";
+import RoomCard from "@/components/rooms/RoomCard";
 
 // --- Animation Variants ---
 const fadeInUp = {
@@ -153,67 +154,33 @@ export default function HomePage(props: HomePageProps) {
                 title={t.deluxeRoom}
                 image="/images/deluxe-room.webp"
                 type="deluxe"
-                viewMore={t.viewMore}
+                viewMoreText={t.viewMore}
               />
               <RoomCard
                 locale={locale}
                 title={t.standardRoom}
                 image="/images/standard-room.webp"
                 type="standard"
-                viewMore={t.viewMore}
+                viewMoreText={t.viewMore}
               />
               <RoomCard
                 locale={locale}
                 title={t.budgetRoom}
                 image="/images/budget-room.webp"
                 type="budget"
-                viewMore={t.viewMore}
+                viewMoreText={t.viewMore}
               />
               <RoomCard
                 locale={locale}
                 title={t.businessRoom}
                 image="/images/business-room.webp"
                 type="business"
-                viewMore={t.viewMore}
+                viewMoreText={t.viewMore}
               />
             </motion.div>
           </div>
         </motion.section>
       </main>
     </div>
-  );
-}
-
-// --- RoomCard component ---
-interface RoomCardProps {
-  locale: Locale;
-  title: string;
-  image: string;
-  type: string;
-  viewMore: string;
-}
-
-function RoomCard({ locale, title, image, type, viewMore }: RoomCardProps) {
-  return (
-    // Apply motion properties directly to the card
-    <motion.div
-      className="overflow-hidden rounded-lg bg-white shadow-md"
-      variants={cardVariants} // Use defined variants for entry/exit
-      whileHover={{ scale: 1.03, transition: { duration: 0.2 } }} // Hover effect
-      // initial, animate, exit are handled by parent's whileInView + stagger
-    >
-      <Link href={`/${locale}/rooms/${type}`}>
-        <img src={image} alt={title} className="h-64 w-full object-cover" />
-      </Link>
-      <div className="p-6">
-        <h3 className="mb-2 text-xl font-medium">{title}</h3>
-        <Link
-          href={`/${locale}/rooms/${type}`}
-          className="mt-4 inline-block text-amber-600 hover:text-amber-800"
-        >
-          {viewMore}
-        </Link>
-      </div>
-    </motion.div>
   );
 }

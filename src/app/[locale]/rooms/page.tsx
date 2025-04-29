@@ -2,6 +2,7 @@
 import type { Locale } from "@/lib/i18n/config";
 import { dictionary } from "@/lib/i18n/config";
 import Link from "next/link";
+import RoomCard from "../../../components/rooms/RoomCard";
 
 interface RoomsPageProps {
   params: Promise<{
@@ -30,72 +31,38 @@ export default async function RoomsPage(props: RoomsPageProps) {
               title={t.deluxeRoom}
               image="/images/deluxe-room.webp"
               type="deluxe"
-              description="With an area of 30 sq. m. and located on the high floor, this room offers all the necessary amenities for two or three people."
-              viewMore={t.viewMore}
+              description={t.deluxeRoomDescription}
+              viewMoreText={t.viewMore}
+              imageHeightClass="h-80"
             />
             <RoomCard
               locale={locale}
               title={t.standardRoom}
               image="/images/standard-room.webp"
               type="standard"
-              description="Comfortable and well-appointed, our standard rooms provide everything you need for a pleasant stay."
-              viewMore={t.viewMore}
+              description={t.standardRoomDescription}
+              viewMoreText={t.viewMore}
+              imageHeightClass="h-80"
             />
             <RoomCard
               locale={locale}
               title={t.budgetRoom}
               image="/images/budget-room.webp"
               type="budget"
-              description="Affordable without compromising on quality, our budget rooms are perfect for the cost-conscious traveler."
-              viewMore={t.viewMore}
+              description={t.budgetRoomDescription}
+              viewMoreText={t.viewMore}
             />
             <RoomCard
               locale={locale}
               title={t.businessRoom}
               image="/images/business-room.webp"
               type="business"
-              description="Designed with the business traveler in mind, featuring a work desk and high-speed internet."
-              viewMore={t.viewMore}
+              description={t.businessRoomDescription}
+              viewMoreText={t.viewMore}
             />
           </div>
         </div>
       </main>
-    </div>
-  );
-}
-
-interface RoomCardProps {
-  locale: Locale;
-  title: string;
-  image: string;
-  type: string;
-  description: string;
-  viewMore: string;
-}
-
-function RoomCard({
-  locale,
-  title,
-  image,
-  type,
-  description,
-  viewMore,
-}: RoomCardProps) {
-  return (
-    <div className="overflow-hidden rounded-lg bg-white shadow-lg">
-      <Link href={`/${locale}/rooms/${type}`}>
-        <img src={image} alt={title} className="h-80 w-full object-cover" />
-      </Link>
-      <div className="p-8">
-        <h2 className="mb-4 text-2xl font-medium">{title}</h2>
-        <p className="mb-6 text-gray-600">{description}</p>
-        <Link
-          href={`/${locale}/rooms/${type}`}
-          className="inline-block rounded-md bg-amber-600 px-6 py-2 text-white transition-colors hover:bg-amber-700"
-        >
-          {viewMore}
-        </Link>
-      </div>
     </div>
   );
 }

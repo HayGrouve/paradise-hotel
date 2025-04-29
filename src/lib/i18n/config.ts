@@ -40,6 +40,14 @@ export const dictionary = {
     followUs: "Follow Us",
     enjoyComfort:
       "Enjoy the comfort in the stylish and elegant atmosphere and discover your kingdom of tranquility away from the busy daily life",
+    deluxeRoomDescription:
+      "Luxurious and spacious, our deluxe rooms offer the ultimate comfort and style. Enjoy breathtaking views, modern amenities, and a serene atmosphere that makes every stay unforgettable.",
+    standardRoomDescription:
+      "Comfortable and well-appointed, our standard rooms are designed for relaxation. With modern furnishings and thoughtful touches, they provide a cozy retreat after a day of exploration.",
+    budgetRoomDescription:
+      "Affordable yet cozy, perfect for budget-conscious travelers. Enjoy all the essentials without compromising on comfort, making it an ideal choice for your stay.",
+    businessRoomDescription:
+      "Designed for the modern traveler, equipped with all essentials. Enjoy a comfortable workspace, high-speed internet, and a peaceful environment to ensure productivity during your stay.",
   },
   bg: {
     home: "Начало",
@@ -77,5 +85,13 @@ export const dictionary = {
     followUs: "Последвайте ни",
     enjoyComfort:
       "Насладете се на комфорта в стилна и елегантна атмосфера и открийте вашето царство на спокойствие далеч от натоварения ежедневен живот",
+    deluxeRoomDescription:
+      "Луксозни и просторни, нашите делукс стаи предлагат максимален комфорт и стил. Насладете се на спиращи дъха гледки, модерни удобства и спокойна атмосфера, която прави всеки престой незабравим.",
+    standardRoomDescription:
+      "Удобни и добре оборудвани, нашите стандартни стаи са проектирани за релаксация. С модерни мебели и внимателни детайли, те осигуряват уютно убежище след ден на разходки.",
+    budgetRoomDescription:
+      "Достъпни, но уютни, перфектни за пътуващи с ограничен бюджет. Насладете се на всички основни удобства без компромис с комфорта, което ги прави идеален избор за вашия престой.",
+    businessRoomDescription:
+      "Проектирани за модерния пътешественик, оборудвани с всички необходими удобства. Насладете се на удобно работно пространство, високоскоростен интернет и спокойна среда, осигуряващи продуктивност по време на престоя ви.",
   },
 };
