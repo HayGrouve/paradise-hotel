@@ -7,6 +7,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { use } from "react";
 import RoomCard from "@/components/rooms/RoomCard";
+import Image from "next/image";
 
 // --- Animation Variants ---
 const fadeInUp = {
@@ -25,12 +26,6 @@ const staggerContainer = {
       staggerChildren: 0.15,
     },
   },
-};
-
-const cardVariants = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-  exit: { opacity: 0, y: -10, transition: { duration: 0.3, ease: "easeIn" } },
 };
 // --- ---
 
@@ -55,10 +50,12 @@ export default function HomePage(props: HomePageProps) {
         viewport={{ once: false, amount: 0.4 }}
         variants={staggerContainer}
       >
-        <img
+        <Image
           src="/images/hero.webp"
           alt="Paradise Deluxe Apartments"
+          fill
           className="absolute inset-0 h-full w-full object-cover"
+          priority
         />
         <div className="absolute inset-0 bg-black/50 backdrop-blur-xs"></div>
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
@@ -66,12 +63,19 @@ export default function HomePage(props: HomePageProps) {
             className="flex max-w-3xl flex-col items-center justify-center"
             variants={staggerContainer}
           >
-            <motion.img
-              src="/images/logo.svg"
-              alt="Paradise Deluxe Apartments Logo"
-              className="mb-4 w-3/4 max-w-md object-contain md:w-1/2"
+            <motion.div
               variants={fadeInUp}
-            />
+              className="mb-4 w-3/4 max-w-md md:w-1/2"
+            >
+              <Image
+                src="/images/logo.svg"
+                alt="Paradise Deluxe Apartments Logo"
+                width={400}
+                height={200}
+                className="object-contain"
+                priority
+              />
+            </motion.div>
             <motion.p className="mb-8 text-xl md:text-2xl" variants={fadeInUp}>
               {t.welcomeDescription}
             </motion.p>

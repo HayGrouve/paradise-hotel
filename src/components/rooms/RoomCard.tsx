@@ -23,6 +23,7 @@ interface RoomCardProps {
   viewMoreText?: string; // Optional: Display a "View More" button with this text
   imageHeightClass?: string; // Optional: Control image height (e.g., "h-64", "h-80")
   className?: string; // Optional: Allow passing additional classes to the wrapper
+  imageOnly?: boolean; // If true, render only the image inside a link
 }
 
 export default function RoomCard({
@@ -34,8 +35,27 @@ export default function RoomCard({
   viewMoreText,
   imageHeightClass = "h-80",
   className = "",
+  imageOnly = false,
 }: RoomCardProps) {
   const linkHref = `/${locale}/rooms/${type}`;
+
+  if (imageOnly) {
+    return (
+      <Link
+        href={linkHref}
+        aria-label={`View details for ${title}`}
+        className="mx-auto block w-[340px]"
+      >
+        <Image
+          src={image}
+          alt={title}
+          width={340}
+          height={192}
+          className="h-48 w-full object-cover"
+        />
+      </Link>
+    );
+  }
 
   return (
     // Apply motion properties directly to the card wrapper

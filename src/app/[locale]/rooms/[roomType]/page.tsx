@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/i18n/config";
 import { dictionary } from "@/lib/i18n/config";
 import Link from "next/link";
 import RoomCard from "../../../../components/rooms/RoomCard";
+import ProductImages from "../../../../components/rooms/ProductImages";
 
 interface RoomPageProps {
   params: Promise<{
@@ -159,89 +160,65 @@ const roomData = {
 
 export default async function RoomPage(props: RoomPageProps) {
   const params = await props.params;
-
   const { locale, roomType } = params;
-
   const t = dictionary[locale];
   const room = roomData[roomType as keyof typeof roomData];
-
   if (!room) {
-    // Handle room not found
     return <div>Room not found</div>;
   }
-
   return (
-    <div className="flex min-h-screen flex-col">
-      <main className="flex-grow bg-[#CEAA87]">
+    <div className="flex min-h-screen flex-col bg-[#cbb293]">
+      <main className="flex-grow">
         <div className="container mx-auto px-4 py-12">
-          <div className="overflow-hidden rounded-lg bg-white shadow-lg">
-            <div className="md:flex">
-              <div className="md:w-1/2">
-                <img
-                  src={room.images[0]}
-                  alt={room.title[locale]}
-                  className="h-full w-full object-cover"
+          <div className="flex flex-col items-center justify-center">
+            <div className="flex w-full flex-col items-center gap-8 md:flex-row md:items-start md:gap-12">
+              <div className="w-full md:w-1/2">
+                <ProductImages
+                  images={room.images.map((url) => ({ url }))}
+                  productName={room.title[locale]}
                 />
               </div>
-              <div className="p-8 md:w-1/2">
-                <h1 className="mb-4 font-serif text-3xl">
+              <div className="flex w-full flex-col items-center md:w-1/2 md:items-start">
+                <h1 className="mb-4 text-center font-serif text-2xl font-semibold tracking-wider text-[#f5f5f5] uppercase text-shadow-lg md:text-left md:text-3xl">
                   {room.title[locale]}
                 </h1>
-                <p className="mb-6 text-gray-700">{room.description[locale]}</p>
-
-                <div className="mb-8">
-                  <h2 className="mb-4 text-xl font-medium">{t.features}</h2>
-                  <ul className="space-y-2">
-                    {room.features[locale].map((feature, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="mr-2 text-amber-600">•</span>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <Link
-                  href={`/${locale}/contact`}
-                  className="inline-block rounded-md bg-amber-600 px-6 py-3 text-white transition-colors hover:bg-amber-700"
+                <div
+                  className="mb-4 w-full text-center text-base font-light text-[#f5f5f5] text-shadow-lg md:text-left"
+                  style={{ textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}
                 >
-                  {t.bookNow}
-                </Link>
+                  {room.description[locale]}
+                </div>
+                <hr className="mb-4 w-full border-t border-[#f5f5f5] opacity-50" />
+                <ul className="list-disc space-y-2 pl-4 text-sm text-[#f5f5f5] text-shadow-lg">
+                  {room.features[locale].map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                  ))}
+                </ul>
               </div>
             </div>
-
-            <div className="border-t p-8">
-              <h2 className="mb-4 text-xl font-medium">{t.morePhotos}</h2>
-              <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-                {room.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={`${room.title[locale]} - ${index + 1}`}
-                    className="h-32 w-full rounded object-cover"
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12">
-            <h2 className="mb-8 text-center font-serif text-2xl">
+            {/* Divider for other rooms */}
+            <hr className="my-8 w-full max-w-4xl border-t border-[#f5f5f5] opacity-50" />
+            <h2 className="mb-8 text-center text-lg font-semibold tracking-widest text-[#f5f5f5] uppercase text-shadow-lg">
               {t.otherRooms}
             </h2>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div className="grid w-full grid-cols-1 gap-8 md:grid-cols-3">
               {Object.entries(roomData)
                 .filter(([key]) => key !== roomType)
                 .map(([key, data]) => (
-                  <RoomCard
-                    className="text-center"
-                    key={key}
-                    locale={locale}
-                    title={data.title[locale]}
-                    image={data.images[0]!}
-                    type={key}
-                    imageHeightClass="h-48"
-                  />
+                  <div key={key} className="flex flex-col items-center">
+                    <RoomCard
+                      className="text-center"
+                      locale={locale}
+                      title={data.title[locale]}
+                      image={data.images[0]!}
+                      type={key}
+                      imageHeightClass="h-48"
+                      imageOnly={true}
+                    />
+                    <span className="mt-4 text-center text-xl font-semibold tracking-wide text-[#f5f5f5] uppercase text-shadow-lg">
+                      {data.title[locale]}
+                    </span>
+                  </div>
                 ))}
             </div>
           </div>

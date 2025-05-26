@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import type { Locale } from "@/lib/i18n/config";
@@ -77,10 +78,13 @@ export default function Header({ locale }: HeaderProps) {
           className="flex items-center"
           onClick={closeMenu}
         >
-          <img
+          <Image
             src="/images/logo.svg"
             alt="Paradise Deluxe Apartments"
-            className="h-12 md:h-20"
+            width={80}
+            height={80}
+            className="h-12 w-auto md:h-20"
+            priority
           />
         </Link>
 

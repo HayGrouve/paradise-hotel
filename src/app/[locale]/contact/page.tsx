@@ -2,6 +2,7 @@
 import type { Locale } from "@/lib/i18n/config";
 import { dictionary } from "@/lib/i18n/config";
 import { use } from "react"; // Import use hook
+import Image from "next/image";
 
 // Update the props type to match Next.js expectations
 type ContactPageProps = {
@@ -18,10 +19,12 @@ export default function ContactPage(props: ContactPageProps) {
       <main className="flex flex-grow flex-col bg-[#CEAA87]">
         {/* Hero Banner */}
         <div className="relative h-96 flex-shrink-0">
-          <img
+          <Image
             src="/images/contact-hero.webp"
             alt="Nea Peramos, Kavala"
+            fill
             className="h-full w-full object-cover"
+            priority
           />
           <div className="absolute inset-0 flex items-center justify-center bg-black/50 backdrop-blur-xs">
             <h1 className="font-serif text-4xl text-white">{t.contactUs}</h1>
